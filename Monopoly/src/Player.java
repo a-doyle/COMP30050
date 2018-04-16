@@ -8,7 +8,6 @@ public class Player {
 	private boolean passedGo;
 	private boolean inJail;
 	
-	//private ArrayList<Property> properties = new ArrayList<Property>();
 	
 	public Player(String name) {
 		this.name = name;
