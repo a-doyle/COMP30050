@@ -15,6 +15,9 @@ public class Players {
 	
 	public void addPlayers(Player player){
 		
+		for(int i = 0; i < playersArray.size(); i++) {
+			
+		}
 	}
 
 }
