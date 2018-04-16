@@ -19,12 +19,7 @@ public class Property {
 		return;
 	}
 		
-// METHODS DEALING WITH NAMES
-	
-	public String getShortName () {
-		return shortName;
-	}
-	
+
 // METHODS DEALING WITH PRICE
 
 	public int getPrice () {
@@ -47,21 +42,9 @@ public class Property {
 		return isOwned;
 	}
 	
-	public void setOwner (Player player) {
-		owner = player;
-		isOwned = true;
-		return;
-	}
+// METHODS DEALING WITH MORTGAGES 
 	
-	public void releaseOwnership () {
-		isOwned = false;
-		owner = null;
-		mortgaged = false;
-		return;
-	}
-	
-// METHODS DEALING WITH MORTGAGES
-	
+	//Change to if statement so if it isnt mortgaged, mortgage the property || unmortgage
 	public void setMortgaged() {
 		mortgaged = true;
 		return;
@@ -69,11 +52,6 @@ public class Property {
 	
 	public boolean isMortgaged() {
 		return mortgaged;
-	}
-	
-	public void setNotMortgaged() {
-		mortgaged = false;
-		return;
 	}
 	
 	public int getMortgageValue() {
