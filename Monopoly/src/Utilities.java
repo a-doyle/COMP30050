@@ -5,9 +5,11 @@ import monopoly.Dice;
 
 public class Utilities extends Property {
 	
+	private static final TileType TILE_TYPE = TileType.UTILITY;
+	
 	// Utility Constructor
 	public Utilities(String name, int netWorth, int rentalAmount, int mortgageValue) {
-		super(name, netWorth, rentalAmount, mortgageValue);
+		super(name, netWorth, rentalAmount, mortgageValue, mortgageValue);
 	}
 
 	// Property Rent Override
@@ -27,5 +29,10 @@ public class Utilities extends Property {
 		} else {
 			return 4 * diceTotal;
 		}
+	}
+	
+	@Override
+	public TileType getTileType() {
+		return TILE_TYPE;
 	}
 }

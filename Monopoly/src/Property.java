@@ -1,6 +1,6 @@
 package monopoly;
 
-public class Property implements Identifiable, Playable, Mortgagable {
+public class Property implements Identifiable, Playable, Mortgagable, Tile {
 	
 	// Member Variables
 	private String name;
@@ -10,6 +10,7 @@ public class Property implements Identifiable, Playable, Mortgagable {
 	private int mortgageValue;
 	private int rentalAmount;
 	private boolean isMortgaged;
+	private static final TileType TILE_TYPE = TileType.PROPERTY;
 	
 	// Property Constructor
 	public Property(String name, int netWorth, int rentalAmount, int mortgageValue, int group) {
@@ -84,5 +85,21 @@ public class Property implements Identifiable, Playable, Mortgagable {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-		
+	
+	@Override
+	public GameState hasLandedOn(Player player) {
+		// if there is no owner, BUY_PROPERTY kicks in
+		// a player also owes rent if they land on an owned property
+		if (owner == null) {
+			return GameState.BUY_PROPERTY;
+		} else {
+			int moneyOwed = getRentalAmount();
+			player.loseMoney(moneyOwed);
+		}
+	}
+	
+	@Override
+	public TileType getTileType() {
+		return TILE_TYPE;
+	}	
 }

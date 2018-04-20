@@ -3,7 +3,7 @@ package monopoly;
 import monopoly.GameState;
 import monopoly.Player;
 
-public class TaxProperty implements Taxable {
+public class TaxProperty implements Taxable, Tile {
 	
 	private int taxRate;
 	private int flatTax;
@@ -38,5 +38,9 @@ public class TaxProperty implements Taxable {
 	public int getFlatTax() {
 		return flatTax;
 	}
-
+	
+	@Override
+	public TileType getTileType() {
+		return TileType.TAX;
+	}
 }
