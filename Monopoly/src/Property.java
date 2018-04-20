@@ -1,46 +1,88 @@
 package monopoly;
 
-public class Property implements Identifiable, Playable, Tradeable {
+public class Property implements Identifiable, Playable, Mortgagable {
 	
 	// Member Variables
 	private String name;
+	private int group;
+	private Playable owner;
 	private int netWorth;
-//	private boolean isMortgagable;
-//	private int mortgageValue;
-//	private int rentalAmount;
-	private int tradeValue;
+	private int mortgageValue;
+	private int rentalAmount;
+	private boolean isMortgaged;
+	
+	// Property Constructor
+	public Property(String name, int netWorth, int rentalAmount, int mortgageValue, int group) {
+		this.name = name;
+		this.netWorth = netWorth;
+		this.rentalAmount = rentalAmount;
+		this.mortgageValue = mortgageValue;
+		this.group = group;
+		this.isMortgaged = false;
+	}
 	
 	public String getIdentifier() {
 		return name;
+	}
+	
+	public int getGroup() {
+		return group;
+	}
+	
+	public Playable getOwner() {
+		return owner;
 	}
 	
 	public int getNetWorth() {
 		return netWorth;
 	}
 	
-	public int getTradeValue() {
-		return tradeValue;
+	public boolean isMortgagable() {
+		// check if house is owned and already mortgaged
+		if (owner == null || isMortgaged == true) {
+			return false;
+		}
+		
+		/* Niall, these methods need to be implemented in the player class */
+		// give mortgage value to player
+		owner.giveMoney(mortgageValue);
+		owner.addMortgagedProperties(1);
+		
+		isMortgaged = true;
+		return true;
 	}
 	
-//	public boolean isMortgagable() {
-//		return isMortgagable;
-//	}
-//	
-//	public int getMortgageValue() {
-//		return mortgageValue;
-//	}
-//	
-//	public int getRentalAmount() {
-//		return rentalAmount;
-//	}
+	public int getMortgageValue() {
+		return mortgageValue;
+	}
 	
-	public static void main(String args[]) {
-		Property prop1 = new Property();
-		Property prop2 = new Property();
-		Property prop3 = new Property();
+	public int getRentalAmount() {
+		// if no owner, staple rent price
+		if (owner == null) {
+			return rentalAmount;
+		}
 		
-		prop1.getIdentifier();
-		prop2.getNetWorth();
-		prop3.getTradeValue();
-	}	
+		// get number of group properties owned by player
+		int numGroupProperties = owner.numOfGroupProperties(group);
+		
+		// change rentalAmount based on this number
+		switch (numGroupProperties) {
+		case 1:
+			return rentalAmount;
+			
+		case 2:
+			return 2 * rentalAmount;
+			
+		// all properties owned
+		default:
+			return 4 * rentalAmount;
+		}
+	}
+
+	@Override
+	public int numOfGroupProperties(int group) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+		
 }
