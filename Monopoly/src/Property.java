@@ -1,6 +1,6 @@
 package monopoly;
 
-public class Property implements Identifiable, Playable, Mortgagable, Tile {
+public class Property implements Identifiable, Playable, Mortgagable, Tile, Improvable {
 	
 	// Member Variables
 	private String name;
@@ -10,6 +10,13 @@ public class Property implements Identifiable, Playable, Mortgagable, Tile {
 	private int mortgageValue;
 	private int rentalAmount;
 	private boolean isMortgaged;
+	private int numHouses;
+	private int housePrice;
+	private int numHotels;
+	private int hotelPrice;
+	private Player player;
+	// get number of group properties owned by player
+	private int numGroupProperties = owner.numOfGroupProperties(group);
 	private static final TileType TILE_TYPE = TileType.PROPERTY;
 	
 	// Property Constructor
@@ -38,6 +45,14 @@ public class Property implements Identifiable, Playable, Mortgagable, Tile {
 		return netWorth;
 	}
 	
+	public int getNumHouses() {
+		return numHouses;
+	}
+	
+	public int getNumHotels() {
+		return numHotels;
+	}
+	
 	public boolean isMortgagable() {
 		// check if house is owned and already mortgaged
 		if (owner == null || isMortgaged == true) {
@@ -63,9 +78,6 @@ public class Property implements Identifiable, Playable, Mortgagable, Tile {
 			return rentalAmount;
 		}
 		
-		// get number of group properties owned by player
-		int numGroupProperties = owner.numOfGroupProperties(group);
-		
 		// change rentalAmount based on this number
 		switch (numGroupProperties) {
 		case 1:
@@ -79,7 +91,67 @@ public class Property implements Identifiable, Playable, Mortgagable, Tile {
 			return 4 * rentalAmount;
 		}
 	}
-
+	
+	public int setHousePrice(int group) {
+		
+		if (group == 0 || group == 1) {
+			housePrice = 25;
+		} else if (group == 2 || group == 3) {
+			housePrice = 50;
+		} else if (group == 4 || group == 5) {
+			housePrice = 75;
+		} else {
+			housePrice = 100;
+		}
+	
+		return housePrice;
+	}
+	
+	public int setHotelPrice(int group) {
+		
+		if (group == 0 || group == 1) {
+			hotelPrice = 125;
+		} else if (group == 2 || group == 3) {
+			hotelPrice = 150;
+		} else if (group == 4 || group == 5) {
+			hotelPrice = 175;
+		} else {
+			hotelPrice = 200;
+		}
+	
+		return hotelPrice;
+	}
+	
+	public int buyHouse(int housePrice) {
+		// can only buy a house if all properties in group are owned
+		if (numGroupProperties >= 2) {
+			numHouses += 1;
+			rentalAmount *= 1.5;
+			player.loseMoney(housePrice);
+		}	
+	}
+	
+	public int sellHouse() {
+		player.giveMoney(housePrice/2);
+		numHouses -= 1;
+		getNumHouses();
+	}
+	
+	public int buyHotel(int hotelPrice) {
+		// can only buy a house if all properties in group are owned
+		if (numHouses == 4) {
+			numHotels += 1;
+			rentalAmount *= 2.0;
+			player.loseMoney(hotelPrice);
+		}	
+	}
+	
+	public int sellHotel() {
+		player.giveMoney(hotelPrice/2);
+		numHotels -= 1;
+		getNumHotels();
+	}
+	
 	@Override
 	public int numOfGroupProperties(int group) {
 		// TODO Auto-generated method stub
