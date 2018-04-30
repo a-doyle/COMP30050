@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.Hashtable;
 
-public class noclist implements GameBoard
+public class noclist extends GameBoard
 {
 	static Random DICE 						 = new Random();
 	
