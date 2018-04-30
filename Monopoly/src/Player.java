@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Player {
 	
@@ -5,8 +6,11 @@ public class Player {
 	private int propertiesOwned;
 	private int balance;
 	private int position;
+	private int escapeAttempts;
 	private boolean passedGo;
 	private boolean inJail;
+	private ArrayList<Card> cardDeck;
+	private ArrayList<Property> properties;
 	
 	
 	public Player(String name) {
@@ -15,12 +19,20 @@ public class Player {
 		balance = 100;
 		passedGo = false;
 		inJail = false;
+		position = 0;
+		escapeAttempts = 0;
+		cardDeck = new ArrayList<Card>();
+		properties = new ArrayList<Property>();
 	}
 	
 	//Methods dealing with the players data.
 	
 	public String getName() {
 		return name;
+	}
+	
+	public int getPosition() {
+		return position;
 	}
 	
 	public boolean isInJail() {
@@ -48,8 +60,42 @@ public class Player {
 		return balance;
 	}
 	
-	public void transaction(int amount){
+	public void addBalanceTransaction(int amount){
 		balance += amount;
 	}
 	
+	public void deductBalanceTransaction(int amount){
+		balance += amount;
+	}
+	
+	public void escapeAttemptsMade() {
+		escapeAttempts++;
+	}
+	
+	public void addCards(Card c) {
+		cardDeck.add(c);
+	}
+	
+	public void addProperty(Property p) {
+		properties.add(p);
+	}
+	
+	//Loops through and calculates all properties owned by player and totals it
+	
+	public void totalAssets() {
+		
+	}
+	
+	public void getHousesOwned() {
+		
+	}
+	
+	public void getUtilitiesOwned() {
+		
+	}
+	
+	public void getTrainstationsOwned() {
+		
+	}
 }
+
