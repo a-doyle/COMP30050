@@ -169,6 +169,142 @@ public class KnowledgeBaseModule
 			return choices.elementAt(RND.nextInt(choices.size()));
 	}
 	
+	// Turn a field value into a hashtag
+	
+	public String hashtagify(String phrase)
+	{
+		if (phrase == null || phrase.length() < 1)
+			return phrase;
+		
+		if (phrase.indexOf((int)' ') < 0)
+			return "#" + Character.toUpperCase(phrase.charAt(0)) + phrase.substring(1);
+		
+		StringBuffer tagged = new StringBuffer("#"); 
+		
+		char prev = ' ', curr = ' ';
+		
+		for (int i = 0; i < phrase.length(); i++)
+		{
+			prev = curr;
+			curr = phrase.charAt(i);
+			
+			if ((prev == ' ' || prev == '.' || prev == '_') && Character.isLowerCase(curr))
+				curr = Character.toUpperCase(curr);
+			
+			if (curr != ' ' && curr != '\"' && curr != '.' && curr != '-' && curr != '\'')
+				tagged.append(curr);
+		}
+		
+		return tagged.toString();
+	}
+	
+	
+	
+	public String replaceWith(String whole, String before, String after)
+	{
+		int where = whole.indexOf(before);
+		
+		while (where >= 0)
+		{
+			whole = whole.substring(0, where) + after + whole.substring(where + before.length());
+			
+			where = whole.indexOf(before, where + after.length());
+		}
+		
+		return whole;
+	}
+
+	
+	// Get the intersection of two lists of concepts
+	
+	public Vector intersect(Vector v1, Vector v2)
+	{
+		if (v1 == null || v1.size() == 0)
+			return null;
+		
+		if (v2 == null || v2.size() == 0)
+			return null;
+		
+		if (v1.size()*v2.size() < 1000)
+		{
+			Vector common = new Vector();
+			
+			for (int i = 0; i < v1.size(); i++)
+				if (v2.contains(v1.elementAt(i)))
+					common.add(v1.elementAt(i));
+			
+			return common;
+		}
+		
+		Hashtable seen = new Hashtable();
+		
+		for (int i = 0; i < v2.size(); i++)
+			seen.put(v2.elementAt(i), "seen");
+		
+		Vector common = new Vector();
+		
+		for (int i = 0; i < v1.size(); i++)
+			if (seen.get(v1.elementAt(i)) != null)
+				common.add(v1.elementAt(i));
+		
+		return common;
+	}
+	
+	
+	// Get the union of two lists of concepts
+	
+	public Vector union(Vector v1, Vector v2)
+	{
+		if (v1 == null || v1.size() == 0)
+			return v2;
+		
+		if (v2 == null || v2.size() == 0)
+			return v1;
+		
+		Hashtable seen = new Hashtable();
+		
+		Vector union = new Vector();
+
+		
+		for (int i = 0; i < v1.size(); i++)
+		{
+			seen.put(v1.elementAt(i), "seen");		
+			union.add(v1.elementAt(i));
+		}
+			
+		for (int i = 0; i < v2.size(); i++)
+			if (seen.get(v2.elementAt(i)) != null)
+				union.add(v2.elementAt(i));
+		
+		return union;
+	}
+	
+	
+	// Get the union of two lists of concepts
+	
+	public Vector difference(Vector v1, Vector v2)
+	{
+		if (v1 == null || v1.size() == 0)
+			return null;
+		
+		if (v2 == null || v2.size() == 0)
+			return v1;
+		
+		Hashtable seen = new Hashtable();
+		
+		Vector difference = new Vector();
+
+		
+		for (int i = 0; i < v2.size(); i++)
+			seen.put(v2.elementAt(i), "seen");		
+			
+		for (int i = 0; i < v1.size(); i++)
+			if (seen.get(v1.elementAt(i)) == null)
+				difference.add(v1.elementAt(i));
+		
+		return difference;
+	}
+
 	
 	//-----------------------------------------------------------------------------------------------//
 	//-----------------------------------------------------------------------------------------------//
