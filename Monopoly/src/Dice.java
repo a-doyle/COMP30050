@@ -19,11 +19,15 @@ public class Dice {
 		return dice1 + " " + dice2;
 	}
 
-	public static void main(String[] args) {
-		Dice d = new Dice();
-		
-		System.out.println(d.total());
-		System.out.println(d.isDouble());
-		System.out.println(d.toString());
+	public int getDice1Value() {
+		// TODO Auto-generated method stub
+		return dice1;
 	}
+
+	public int getDice2Value() {
+		// TODO Auto-generated method stub
+		return dice2;
+	}
+
 }
+
