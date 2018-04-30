@@ -9,6 +9,7 @@ public class Player {
 	private int escapeAttempts;
 	private boolean passedGo;
 	private boolean inJail;
+	private int numberOfMortgagedProperties;
 	private ArrayList<Card> cardDeck;
 	private ArrayList<Property> properties;
 	
@@ -23,6 +24,7 @@ public class Player {
 		escapeAttempts = 0;
 		cardDeck = new ArrayList<Card>();
 		properties = new ArrayList<Property>();
+		
 	}
 	
 	//Methods dealing with the players data.
@@ -50,7 +52,7 @@ public class Player {
 	//Other Methods needed to be properly implemented
 	
 	public void sendToJail(){
-		
+		position = 4;
 		inJail = true;
 	}
 	
@@ -82,11 +84,32 @@ public class Player {
 	
 	//Loops through and calculates all properties owned by player and totals it
 	
-	public void totalAssets() {
+	public int totalAssets() {
+		
+		int assets = balance;
+		
+		for(Property property : properties) {
+			assets +=  property.getNetWorth();
+		}
+		
+		return assets;
 		
 	}
 	
-	public void getHousesOwned() {
+	public int getHousesOwned() {
+		
+		int owned = 0;
+		
+		for(Property property : properties) {
+			
+			if(owned > 4) {
+				deductBalanceTransaction(40);
+			}else if(owned > 10) {
+				deductBalanceTransaction(100);
+			}
+			owned++;
+		}
+		return owned;
 		
 	}
 	
@@ -97,5 +120,21 @@ public class Player {
 	public void getTrainstationsOwned() {
 		
 	}
+	
+	public int numberOfMortgagedProperties() {
+		
+		int num = 0;
+		
+		for(Property property : properties) {
+			if(property.isMortgagable() == true){
+				num++;
+			}
+		}
+		
+		return num;
+	}
+	
+	public String toString() {
+		return name + " " + propertiesOwned + " " + balance;
+	}
 }
-
