@@ -2,6 +2,7 @@
 public class Main {
 	public static void main(String args[]) {
 		
+		boolean gameOver = false;
 		Panopoly p = new Panopoly();
 		
 		/*
@@ -14,5 +15,9 @@ public class Main {
 		 * 4. Image selector function that decides the image to be used on the board
 		 * */
 		
+		while(gameOver != true) {
+			
+			
+		}
 	}
 }
