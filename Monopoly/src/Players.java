@@ -28,6 +28,13 @@ public class Players {
 		}
 	}
 	
+	public void getNextPlayer(Player player) {
+		
+		Player next;
+		
+	}
+	
+	
 	//Testing methods needs to be deleted at end
 	
 	public static void main(String args[]) {
