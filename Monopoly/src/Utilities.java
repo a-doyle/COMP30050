@@ -17,14 +17,16 @@ public class Utilities extends Property {
 	public int getRentalAmount() {
 		Dice dice = new Dice();
 		int diceTotal = dice.total();
+		// check if a player owns the property
+		Player owner = (Player) getOwner();
 		
-		if (getOwner() == null) {
+		if (owner == null) {
 			// method in Dice
 			return 4 * diceTotal;
 		}
 		// if one owned, four times the dice roll
 		// if both, ten times the dice roll
-		if (getOwner().getUtilitiesOwned() == 2) {
+		if (owner.getUtilitiesOwned() == 2) {
 			return 10 * diceTotal;
 		} else {
 			return 4 * diceTotal;

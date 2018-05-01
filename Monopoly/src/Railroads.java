@@ -23,7 +23,7 @@ public class Railroads extends Property {
 		if (getOwner() == null) {
 			return startingRent;
 		} else {
-			return (startingRent / 2) * Math.pow(2,  (owner.getRailroadsOwned()) - 1);
+			return (int) ((startingRent / 2) * Math.pow(2,  (owner.getRailroadsOwned()) - 1));
 		}
 	}
 	

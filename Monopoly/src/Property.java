@@ -16,7 +16,7 @@ public class Property implements Identifiable, Playable, Mortgagable, Tile, Impr
 	private int hotelPrice;
 	private Player player;
 	// get number of group properties owned by player
-	private int numGroupProperties = owner.numOfGroupProperties(group);
+	private int numGroupProperties = player.numOfGroupProperties(group);
 	private static final TileType TILE_TYPE = TileType.PROPERTY;
 	
 	// Property Constructor
@@ -29,6 +29,10 @@ public class Property implements Identifiable, Playable, Mortgagable, Tile, Impr
 		this.isMortgaged = false;
 	}
 	
+	public void setOwner(Player newOwner) {
+		this.owner = (Playable) newOwner;
+	}
+	
 	public String getIdentifier() {
 		return name;
 	}
@@ -39,6 +43,10 @@ public class Property implements Identifiable, Playable, Mortgagable, Tile, Impr
 	
 	public Playable getOwner() {
 		return owner;
+	}
+	
+	public boolean isOwned() {
+		return (owner != null);
 	}
 	
 	public int getNetWorth() {
@@ -59,10 +67,9 @@ public class Property implements Identifiable, Playable, Mortgagable, Tile, Impr
 			return false;
 		}
 		
-		/* Niall, these methods need to be implemented in the player class */
 		// give mortgage value to player
-		owner.giveMoney(mortgageValue);
-		owner.addMortgagedProperties(1);
+		((Player) owner).addBalanceTransaction(mortgageValue);
+		((Player) owner).addMortgagedProperties(1);
 		
 		isMortgaged = true;
 		return true;
@@ -77,6 +84,8 @@ public class Property implements Identifiable, Playable, Mortgagable, Tile, Impr
 		if (owner == null) {
 			return rentalAmount;
 		}
+		
+		int numGroupProperties = player.numOfGroupProperties(group);
 		
 		// change rentalAmount based on this number
 		switch (numGroupProperties) {
@@ -122,40 +131,32 @@ public class Property implements Identifiable, Playable, Mortgagable, Tile, Impr
 		return hotelPrice;
 	}
 	
-	public int buyHouse(int housePrice) {
+	public void buyHouse(int housePrice) {
 		// can only buy a house if all properties in group are owned
 		if (numGroupProperties >= 2) {
 			numHouses += 1;
 			rentalAmount *= 1.5;
-			player.loseMoney(housePrice);
-		}	
+			player.deductBalanceTransaction(housePrice);
+		}
 	}
 	
-	public int sellHouse() {
-		player.giveMoney(housePrice/2);
+	public void sellHouse() {
+		player.addBalanceTransaction(housePrice/2);
 		numHouses -= 1;
-		getNumHouses();
 	}
 	
-	public int buyHotel(int hotelPrice) {
+	public void buyHotel(int hotelPrice) {
 		// can only buy a house if all properties in group are owned
 		if (numHouses == 4) {
 			numHotels += 1;
 			rentalAmount *= 2.0;
-			player.loseMoney(hotelPrice);
-		}	
+			player.deductBalanceTransaction(hotelPrice);
+		}
 	}
 	
-	public int sellHotel() {
-		player.giveMoney(hotelPrice/2);
+	public void sellHotel() {
+		player.addBalanceTransaction(hotelPrice/2);
 		numHotels -= 1;
-		getNumHotels();
-	}
-	
-	@Override
-	public int numOfGroupProperties(int group) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 	
 	@Override
@@ -166,7 +167,8 @@ public class Property implements Identifiable, Playable, Mortgagable, Tile, Impr
 			return GameState.BUY_PROPERTY;
 		} else {
 			int moneyOwed = getRentalAmount();
-			player.loseMoney(moneyOwed);
+			player.deductBalanceTransaction(moneyOwed);
+			return GameState.PLAYING;
 		}
 	}
 	

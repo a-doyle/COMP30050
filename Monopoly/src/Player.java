@@ -1,3 +1,5 @@
+package monopoly;
+
 import java.util.ArrayList;
 
 public class Player {
@@ -49,11 +51,11 @@ public class Player {
 		return propertiesOwned;
 	}
 	
-	public int numOfGroupProperties(group) {
+	public int numOfGroupProperties(int group) {
 		int num = 0;
 		
 		for (Property property: properties) {
-			if (group == p.getGroup()) {
+			if (group == property.getGroup()) {
 				num++;
 			}
 		}
@@ -112,14 +114,17 @@ public class Player {
 		int housesOwned = 0;
 		
 		for(Property property : properties) {
+			housesOwned = property.getNumHouses();
 			
 			if (housesOwned > 4) {
 				deductBalanceTransaction(40);
 			} else if (housesOwned > 10) {
 				deductBalanceTransaction(100);
 			}
+			
 			housesOwned++;
 		}
+		
 		return housesOwned;
 		
 	}
@@ -137,7 +142,7 @@ public class Player {
 		return utilitiesOwned;
 	}
 	
-	public int getRailRoadsOwned() {
+	public int getRailroadsOwned() {
 		
 		int railroadsOwned = 0;
 		
@@ -149,7 +154,7 @@ public class Player {
 		return railroadsOwned;
 	}
 	
-	public int numberOfMortgagedProperties() {
+	public int getMortgagedProperties() {
 		
 		int num = 0;
 		

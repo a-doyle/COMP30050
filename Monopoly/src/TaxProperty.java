@@ -26,7 +26,8 @@ public class TaxProperty implements Taxable, Tile {
 			amountOwed = flatTax;
 		}
 		
-		player.loseMoney(amountOwed);
+		player.deductBalanceTransaction(amountOwed);
+		return GameState.PLAYING;
 	}
 
 	@Override
