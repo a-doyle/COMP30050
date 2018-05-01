@@ -52,7 +52,7 @@ public class Player {
 	public int numOfGroupProperties(group) {
 		int num = 0;
 		
-		for (Property p: properties) {
+		for (Property property: properties) {
 			if (group == p.getGroup()) {
 				num++;
 			}
@@ -78,7 +78,7 @@ public class Player {
 	}
 	
 	public void deductBalanceTransaction(int amount){
-		balance += amount;
+		balance -= amount;
 	}
 	
 	public void escapeAttemptsMade() {
@@ -109,27 +109,44 @@ public class Player {
 	
 	public int getHousesOwned() {
 		
-		int owned = 0;
+		int housesOwned = 0;
 		
 		for(Property property : properties) {
 			
-			if(owned > 4) {
+			if (housesOwned > 4) {
 				deductBalanceTransaction(40);
-			}else if(owned > 10) {
+			} else if (housesOwned > 10) {
 				deductBalanceTransaction(100);
 			}
-			owned++;
+			housesOwned++;
 		}
-		return owned;
+		return housesOwned;
 		
 	}
 	
-	public void getUtilitiesOwned() {
+	public int getUtilitiesOwned() {
 		
+		int utilitiesOwned = 0;
+		
+		for (Property property : properties) {
+			if (property.getTileType() == TileType.UTILITY) {
+				utilitiesOwned++;
+			}
+		}
+		
+		return utilitiesOwned;
 	}
 	
-	public void getTrainstationsOwned() {
+	public int getRailRoadsOwned() {
 		
+		int railroadsOwned = 0;
+		
+		for (Property property : properties) {
+			if (property.getTileType() == TileType.RAILROAD) {
+				railroadsOwned++;
+			}
+		}
+		return railroadsOwned;
 	}
 	
 	public int numberOfMortgagedProperties() {
@@ -143,6 +160,10 @@ public class Player {
 		}
 		
 		return num;
+	}
+	
+	public void addMortgagedProperties(int x) {
+		this.numberOfMortgagedProperties += x;
 	}
 	
 	public String toString() {
