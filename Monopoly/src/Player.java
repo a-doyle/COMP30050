@@ -48,6 +48,17 @@ public class Player {
 	public int numOfPropertiesOwned() {
 		return propertiesOwned;
 	}
+	
+	public int numOfGroupProperties(group) {
+		int num = 0;
+		
+		for (Property p: properties) {
+			if (group == p.getGroup()) {
+				num++;
+			}
+		}
+		return num;
+	}
 
 	//Other Methods needed to be properly implemented
 	
