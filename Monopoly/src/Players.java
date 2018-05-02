@@ -4,10 +4,12 @@ public class Players {
 	
 	public static final int MAX_PLAYERS = 8;
 	public static ArrayList<Player> playersArray;
+	private static boolean playerRemoved;
 	
 	public Players() {
 		
 		playersArray = new ArrayList<Player>();
+		
 	}
 	
 	public void addPlayers(Player player){ 
@@ -16,22 +18,41 @@ public class Players {
 
 	public void removePlayers(Player player) {
 		
-		boolean removed = false;
 		
 		for(Player p: playersArray) {
 			
 			if(p.getName().equals(player.getName())) {
 				playersArray.remove(player);
-				removed = true;
+				playerRemoved= true;
 				break;
 			}
 		}
+	}
+	
+	public Player getPlayer(int index) {
+		return playersArray.get(index);
+	}
+	
+	public Player get (int playerId) {
+		return playersArray.get(playerId);
+	}
+	
+	public Player getNext(Player currPlayer) {
+		
+		Player nextPlayer;
+		
+		nextPlayer = get((playersArray.indexOf(currPlayer) + 1) % playersArray.size());
+		
+		return nextPlayer;
 	}
 	
 	public void getNextPlayer(Player player) {
 		
 		Player next;
 		
+		if(playerRemoved) {
+			next = player;
+		}		
 	}
 	
 	
