@@ -194,31 +194,6 @@ public class Command
 		textArea.setCaretPosition(textArea.getDocument().getLength());
 	}
 	
-	public static void quit()
-	{
-		int[] sum = new int[6];
-		int currentWinner = 0;
-		
-		for(int i = 0; i < Board.numberPlayers; i++){
-			ArrayList<Properties> temp = Board.PlayerArray[Board.currentPlayer].getPropertyOwned();
-			
-			for(int j = 0;j < temp.size(); j++){
-				
-				sum[i] = sum[i] + temp.get(j).value;
-			}
-			sum[i] = sum[i] + Board.PlayerArray[Board.currentPlayer].balance;
-			
-			if(sum[i] > sum[currentWinner])
-				currentWinner=i;
-			}
-		
-			textArea.append(Board.PlayerArray[currentWinner].name+" Is the winner!");
-			Scroll();
-			Board.commandPanel.removeAll();
-		
-		
-	}
-	
 	public static void mortgageProperty(String property){
 		
 		int player = Board.currentPlayer;
