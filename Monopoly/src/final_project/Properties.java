@@ -1,4 +1,4 @@
-package Sprint4;
+package monopoly_take2;
 
 public class Properties
 {
