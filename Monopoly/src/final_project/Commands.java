@@ -1,4 +1,4 @@
-package Sprint4;
+package monpoly_take2;
 
 import java.util.ArrayList;
 import javax.swing.JTextArea;
