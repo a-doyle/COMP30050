@@ -1,162 +1,155 @@
-package Sprint4;
+package monopoly_take2;
 
 public class CommunityChest {
 	
-	public static int currPlayer;
-
+	private static String cardDescription;
+	public static String cardType = "community";
+	public static int player;
+	private static final CardType CARD_TYPE = CardType.COMMUNITY;
+	
 	public static void cc1(){
+		player = Board.currPlayer;
+		cardDescription = "You've been offered a sponsorship, collect your first pay package at Go!";
 		
-		currPlayer = Board.currentPlayer;
-		
-		Board.textArea.append("Away ya go to GO! \n");
-		Board.Dots[currPlayer].setLocation(Board.BoardCoord[0][0]+((currPlayer % 3) * Board.offset),Board.BoardCoord[0][1]+((currPlayer / 3) * Board.offset));
-
+		UI.textArea.append(cardDescription);
+		Board.playerIcons[player].setLocation(Board.boardPos[0][0]+((player % 3) * UI.uqLoc),Board.boardPos[0][1]+((player / 3) * UI.uqLoc));
 	}
 
 	public static void cc2(){
+		player = Board.currPlayer;
+		cardDescription = "Take a trip to your local supp store!";
 		
-	    currPlayer = Board.currentPlayer;
-		int position = Board.PlayerArray[currPlayer].position;
-		
-		Board.textArea.append("Away ya go back to  ! \n");
-		
-		position = 18;
-		Board.Dots[currPlayer].setLocation(Board.BoardCoord[0][0]+((currPlayer % 3) * Board.offset),Board.BoardCoord[0][1]+((currPlayer / 3) * Board.offset));
+		UI.textArea.append(cardDescription);
+		Board.playerIcons[player].setLocation(Board.boardPos[0][0]+((player % 3) * UI.uqLoc),Board.boardPos[0][1]+((player / 3) * UI.uqLoc));
 
 	}
 	
 	public static void cc3(){
+		player = Board.currPlayer;
+		int position = Board.playerList[player].position;
+		cardDescription = "Caught with roids? You've been slapped with cuffs and face extensive jail time!";
 		
-		currPlayer = Board.currentPlayer;
-		int position = Board.PlayerArray[currPlayer].position;
-		
-		Board.textArea.append("Illegal activity ? Away to jail ya go. \n Dont collect $200 if you pass go. \n");
+		UI.textArea.append(cardDescription);
 		position = 10;
-		Board.Dots[currPlayer].setLocation(Board.BoardCoord[position][0] + ((currPlayer % 3) * Board.offset), Board.BoardCoord[position][1] + ((currPlayer / 3) * Board.offset));
-		Board.PlayerArray[currPlayer].inJail = true;
+		Board.playerIcons[player].setLocation(Board.boardPos[position][0] + ((player % 3) * UI.uqLoc), Board.boardPos[position][1] + ((player / 3) * UI.uqLoc));
+		Board.playerList[player].inJail = true;
 	}
 
 	public static void cc4(){
+		player = Board.currPlayer;
+		cardDescription = "You drank some badd egg whites, and are forced to fork out a bill for the doctor!";
 		
-		currPlayer = Board.currentPlayer;
-		
-		Board.textArea.append("Sick as a dog and have to go to hospital. $100 payment \n");
-		Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance - 100;
+		UI.textArea.append(cardDescription);
+		Board.playerList[player].balance = Board.playerList[player].balance - 100;
 	}
 	
 	public static void cc5(){
+		player = Board.currPlayer;
+		cardDescription = "Payday leads to an expensive supp stock up!";
 		
-		currPlayer = Board.currentPlayer;
-		
-		Board.textArea.append("Doctors fine $50. \n");
-		Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance - 50;
+		UI.textArea.append(cardDescription);
+		Board.playerList[player].balance = Board.playerList[player].balance - 150;
 	}
 
 	public static void cc6(){
+		player = Board.currPlayer;
+		cardDescription = "Direct debit on your gym membership is due, pay 50!";
 		
-		currPlayer = Board.currentPlayer;
-		
-		Board.textArea.append("Car insurance due on your yoke. $50 bucks owed. \n");
-		Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance - 50;
+		UI.textArea.append(cardDescription);
+		Board.playerList[player].balance = Board.playerList[player].balance - 50;
 	}
 	
 	public static void cc7(){
+		player = Board.currPlayer;
+		cardDescription = "You were charged twice for that protein order, here's 200!";
 		
-		currPlayer = Board.currentPlayer;
-		
-		Board.textArea.append("Bank messed your account up. Heres $200. \n");
-		Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance + 200;
+		UI.textArea.append(cardDescription);
+		Board.playerList[player].balance = Board.playerList[player].balance + 200;
 	}
 
 	public static void cc8(){
+		player = Board.currPlayer;
+		cardDescription = "You set new records in the gym and were awarded 100!";
 		
-		currPlayer = Board.currentPlayer;
-		
-		Board.textArea.append("Amunity matures. Heres $100. \n");
-		Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance + 100;
+		UI.textArea.append(cardDescription);
+		Board.playerList[player].balance = Board.playerList[player].balance + 100;
 	}
 	
 	public static void cc9(){
+		player = Board.currPlayer;
+		cardDescription = "Investments have paid off and resulted in you getting 100!";
 		
-		currPlayer = Board.currentPlayer;
-		
-		Board.textArea.append("Oul boys after giving you $100 for food. \n");
-		Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance + 100;
+		UI.textArea.append(cardDescription);
+		Board.playerList[player].balance = Board.playerList[player].balance + 100;
 	}
 
 	public static void cc10(){
+		player = Board.currPlayer;
+		cardDescription = "Dealing protein bars on the side result in a cash surplus of 50!";
 		
-		currPlayer = Board.currentPlayer;
-		
-		Board.textArea.append("From selling a bars out of your locker ya made $50. \n");
-		Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance  + 50;
+		UI.textArea.append(cardDescription);
+		Board.playerList[player].balance = Board.playerList[player].balance  + 50;
 	}
 	
 	public static void cc11(){
+		player = Board.currPlayer;
+		cardDescription = "Interest in the gym pays dividends, here's 25!";
 		
-		currPlayer = Board.currentPlayer;
-		
-		Board.textArea.append("Recieve interest of 7% preference shares: $25 \n");
-		Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance + 25;
+		UI.textArea.append(cardDescription);
+		Board.playerList[player].balance = Board.playerList[player].balance + 25;
 	}
 
 	public static void cc12(){
+		player = Board.currPlayer;
+		cardDescription = "Taxback of 75!";
 		
-		currPlayer = Board.currentPlayer;
-		
-		Board.textArea.append("Tax refund of $20. \n");
-		Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance + 20;
+		UI.textArea.append(cardDescription);
+		Board.playerList[player].balance = Board.playerList[player].balance + 75;
 	}
 	
 	public static void cc13(){
+		player = Board.currPlayer;
+		cardDescription = "Pay your gym membership!";
 		
-		currPlayer = Board.currentPlayer;
-		
-		Board.textArea.append("You won second prize in a beauty contest: Collect $10. \n");
-		Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance + 10;
+		UI.textArea.append(cardDescription);
+		Board.playerList[player].balance = Board.playerList[player].balance - 200;
 	}
 
 	public static void cc14(){
+		player = Board.currPlayer;
+		int money = 0;
+		cardDescription = "To mark your birthday, every player gives you cash to fuel your upcoming restock!";
 		
-		currPlayer = Board.currentPlayer;
-		int money = 0; 
-		
-		Board.textArea.append("Its your birthday ! Collect $10 from each player. Cheek of that. \n");
-		Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance + 10;
-		
-		for(int i = 0; i < Board.numberPlayers - 1; i++){
-			
-			Board.PlayerArray[i].balance = Board.PlayerArray[i].balance - 10;
-			money += 10;
-			
-			if(Board.PlayerArray[currPlayer] == Board.PlayerArray[i]){
-				Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance + money;
-			}
-			
-			
+		UI.textArea.append(cardDescription);
+		Board.playerList[player].balance = Board.playerList[player].balance + (15 * Board.playerCount);
+		for(int i = 0; i < Board.playerCount - 1; i++){
+			Board.playerList[i].balance = Board.playerList[i].balance - 15;
+			money += 15;
+			if(Board.playerList[player] == Board.playerList[i]){
+				Board.playerList[player].balance = Board.playerList[player].balance + money;
+			}	
 		}
-
 	}
 	
 	public static void cc15(){
+		cardDescription = "You've been offered pure creatine, undetectable by the law. Use it if you're caught to escape!";
 		
-		currPlayer = Board.currentPlayer;
-		
-		Board.textArea.append("Get out of jail free. This card may be kept until needed or sold \n");
+		UI.textArea.append(cardDescription);
 	}
 
 	public static void cc16(){
+		player = Board.currPlayer;
+		cardDescription = "Pay your dealer what you owe, or take a chance!";
 		
-		currPlayer = Board.currentPlayer;
-		
-		Board.textArea.append("Pay a $10 fine or take a chance card. \n");
-		
-		if(currPlayer != 3){
-			Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance - 10;
+		UI.textArea.append(cardDescription);
+		if(player != 3) {
+			Board.playerList[player].balance = Board.playerList[player].balance - 25;
+		} else {
+			Command.drawChance();
 		}
-		else{
-			//Command.drawChance();
-		}
-		//Get user input and use if statement to decide which route to go
+	}
+	
+	public CardType getCardType() {
+		return CARD_TYPE;
 	}
 }
