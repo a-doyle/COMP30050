@@ -1,4 +1,4 @@
-package Sprint4;
+package monopoly_take2;
 
 import java.util.ArrayList;
 import javax.swing.JTextArea;
@@ -275,6 +275,7 @@ public class Command
 						unMortgage(unmortgageDetail);
 						break;
 						
+						
 					default: 
 						textArea.append("Invalid input, please try \"help\" \n");
 						Command.Scroll();
@@ -306,8 +307,8 @@ public class Command
 					case "buy":
 						textArea.append(Properties.purchase(currPlayer)+"\n");
 						break;
-					
-					case "pay rent":
+						
+					case "pay":
 						Properties.payRent(currPlayer);
 						break;
 						
