@@ -10,11 +10,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.Collections;
 
 
 public class NOCList {
-
+	
         
 	public static void main(String[] args) throws FileNotFoundException {
 		
@@ -38,10 +38,12 @@ public class NOCList {
 	          }
 	          
 	          newDads.remove(0);
-	          
+	          Collections.shuffle(newDads);
 	          for(ArrayList<String> ads : newDads) {
 	        	  	System.out.println(ads.get(0));
 	          }
+	          
+
               //System.out.println(newDads);
 
 	        }
