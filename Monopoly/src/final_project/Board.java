@@ -1,4 +1,4 @@
-package Sprint4;
+package monopoly_take2;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -28,34 +28,34 @@ import javax.swing.text.DefaultCaret;
 
 class Board extends JFrame implements ActionListener 
 {
-	private static int[] movePos={0,0,0,0,0,0};//ARRAY OF POSITIONS FOR PLAYERS 
-    	private static JLabel board;
-    	public static JLabel[] Dots=new JLabel[7];
+    private static JLabel board;
+    public static JLabel[] Dots = new JLabel[7];
 	public static final long serialVersionUID = 1L;
 	public static String[] UrlList={"http://i.imgur.com/VbSecNL.png","http://i.imgur.com/OspXIUI.png","http://i.imgur.com/qIxtgOY.png","http://i.imgur.com/7KE7dLV.png",
 	"http://i.imgur.com/CfsO3YF.png","http://i.imgur.com/l12Qyvd.png"};
 	public static boolean GAMEOVER = false;
 	public static boolean canRoll = true;	
-	public static Properties prop;
-
+	public static Properties prop;	
+	
 	static final int[][] BoardCoord = {
 	{542,542},{491,542},{440,542},{389,542},{338,542},{287,542},{236,542},{185,542},{134,542},{83,542},{32,542},
 	{32,491},{32,440},{32,389},{32,338},{32,287},{32,236},{32,185},{32,134},{32,83},{32,32},
 	{83,32},{134,32},{185,32},{236,32},{287,32},{338,32},{389,32},{440,32},{491,32},{542,32},
 	{542,83},{542,134},{542,185},{542,236},{542,287},{542,338},{542,389},{542,440},{542,491}};
-	public static Players[] PlayerArray = new Players[6];
 	
-	 // offset applied to each token to give it a unique location on board
-	static int offset = 16;
-	// number of players in game
-	static int numberPlayers = 0;
+	
+	public static Players[] PlayerArray = new Players[7];
+	
+	static int offset = 16; // offset applied to each token to give it a unique location on board
+	static int numberPlayers = 0;//number of players in game, can be changed at later date
 	public static int currentPlayer = 0;
 	public static String[] Playernames = new String[6];
 	private static JSplitPane  splitPaneRight;
 	private static JSplitPane  splitPaneLeft;
 	private static PlayerStart player;
-
-	// JPanels for the command, board, and the information display 
+	
+	
+	//JPanels for the command, board, and the information display 
 	static JPanel  commandPanel;
 	private JPanel  boardPanel;
 	private JPanel  informationDisplayPanel;
@@ -83,148 +83,155 @@ class Board extends JFrame implements ActionListener
 	    informationPanel();
 	    textArea.setEditable(false);
 	    textArea.setFont(new Font("Serif", Font.BOLD, 15));
-	    // Splits the right frame
+	    // Creates a spliter for right frame
 	    splitPaneRight = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 	    leftPanel.add(splitPaneRight, BorderLayout.CENTER);
 	    
 	    splitPaneLeft = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 	    
-	    // Adds both the command and board panels to the left
+	    //Adds both the command and board panels to the left
+	    
 	    splitPaneLeft.setBottomComponent(commandPanel);
 	    splitPaneLeft.setTopComponent(boardPanel);
 	    
-	    // Adds the information panel to the right
+	    //Adds both the information panel to the right
 	    splitPaneRight.setLeftComponent(splitPaneLeft);
 	    splitPaneRight.setRightComponent(informationDisplayPanel);
 	}
 	
 	public void commandLinePanel(){
-		// creates and aligns text entry field
+		//creates and aligns text entry field
 		commandPanel = new JPanel();
 		commandPanel.setLayout(new BorderLayout());  
 		commandPanel.add(textField, BorderLayout.CENTER);
 		commandPanel.add(button, BorderLayout.EAST);
 		textField.setFont(new Font("Serif", Font.BOLD, 24));
-		// event fires when button is clicked
+		//when button is clicked beside input panel a listener is activated
 		textField.addKeyListener
 		(new KeyListener(){
 			public void keyPressed(KeyEvent e)
 			{
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
-					// counts line and adds text inputed
-					textArea.append(textField.getText() +"\n");
-					// increments each time input is added
-					Command.Scroll();
+					textArea.append(textField.getText() +"\n");//counts line and adds text inputed
+					Command.Scroll();//increments each time input is added
 					try {
 						Command.checkInput();
 					} catch (InterruptedException e1) {
 						
 						e1.printStackTrace();
 					}
-					// resetting text field
-					textField.setText("");
+					textField.setText("");//setting text field back to be blank
 					} 
 				}
-				
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// This function is unused
+				// TODO Auto-generated method stub
+				
 			}
 
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				// This function is unused		
+				// TODO Auto-generated method stub
+				
 			}
-		});
-		
+			}
+		);
 		button.addActionListener
-		(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					// ensures text is added to each counted line
-					textArea.append( textField.getText() + "\n");
+		
+		(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e) 
+				{
+					textArea.append( textField.getText() + "\n");//counts line and adds text inputed
 					Command.Scroll();
 					try {
 						Command.checkInput();
-					} catch (InterruptedException e1) {
+					}catch (InterruptedException e1) {
 						e1.printStackTrace();
-					}
-					// resetting text field 
-					textField.setText("");
-				}  		
-		});
+		}
+		textField.setText("");//setting text field back to be blank
+		}  		
+	}
+);
 	}
 	
-	public static ImageIcon createImages(String URL) throws IOException {
+
+	public static ImageIcon createImages(String URL) throws IOException{
 		URL url = new URL(URL);
-	    	BufferedImage img = ImageIO.read(url);
-	    	ImageIcon icon = new ImageIcon(img);
+	    BufferedImage img = ImageIO.read(url);
+	    ImageIcon icon = new ImageIcon(img);
 		return icon;
 	}
 	
-	public static void createJlabels() throws IOException {
-		// creates image for the board
+	public static void createJlabels() throws IOException{
 		board = new JLabel(createImages("http://i.imgur.com/n3lFgwu.jpg"));
+		
 		for(int i = 0;i < numberPlayers; i++){
 			Dots[i]=new JLabel(createImages(UrlList[i]));
 		}
 	}
-	
-	public void monopolyBoardPanel() throws IOException {
+	public void monopolyBoardPanel() throws IOException{
+		
 		//creating a new panel for the monopoly board
 		boardPanel = new JPanel();
 		boardPanel.setLayout(null);
 		
-		// controls settings for blue dot
-		for(int i = 0;i < numberPlayers;i++) {
-		    boardPanel.add(Dots[i]);
-		    Dots[i].setSize(10, 10);
+		for(int i = 0;i < numberPlayers;i++)
+		{
+		    boardPanel.add(Dots[i]);//adding the blue dot image
+		    Dots[i].setSize(10, 10);//setting the pixel size of the blue dot
 		    Dots[i].setLocation(BoardCoord[0][0]+((i%3)*offset),BoardCoord[0][1]+((i/3)*offset));//sets starting location
 		}
 	    
-	    // setting the size of the board panel and adding the board to the panel
+	    //setting the size of the board panel and adding the board to the panel
 	    board.setSize(620,620);
 	    boardPanel.add(board);
 	}
 
-	public void informationPanel() {
-		// Creates panel and sets its parameters
+	public void informationPanel()
+	{
+		
+		//Creates panel and sets its parameters
 		informationDisplayPanel = new JPanel();
 		informationDisplayPanel.setLayout(new BorderLayout());
 		informationDisplayPanel.setPreferredSize(new Dimension(50, 50));
 		informationDisplayPanel.setMinimumSize(new Dimension(50, 50));
 
-		// Adds the textarea to a scollpane 
+		//Adds the textarea to a scollpane 
 		DefaultCaret caret = (DefaultCaret)textArea.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		scrollPane = new JScrollPane(textArea);
 		informationDisplayPanel.add(new JLabel( "Information Panel: Details all events of the game."), BorderLayout.NORTH);
+		
 		informationDisplayPanel.add(scrollPane, BorderLayout.CENTER);
 	}
 	
 	
 	
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// unused
-	}
+	public void actionPerformed(ActionEvent arg0)
+	{
+	}//needed
+	//class to decide what movement will happen initially
 	
 	public static void main( String args[] ) throws IOException, InterruptedException{
+		
 		prop.createProperties();
 		
 		//setting the look of the window
-		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		} catch (Exception evt) {
-			// unused
-		}
-
-	        while(numberPlayers == 0 || numberPlayers > 6 || numberPlayers < 2){
+	    try 
+	    {
+	        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+	    } catch (Exception evt) {}
+	    
+	    while(numberPlayers == 0 || numberPlayers > 6 || numberPlayers < 2){
 			String count = JOptionPane.showInputDialog("Enter player count 2-6");
 			numberPlayers = Integer.parseInt(count);
-	        }
-		player.playersInitialise(numberPlayers, PlayerArray);
-		createJlabels();
+		}
+	    
+	    player.playersInitialise(numberPlayers, PlayerArray);
+	    createJlabels();
 	    
 	   // Create an instance of the test application
 	    Board monopoly = new Board();
@@ -236,7 +243,7 @@ class Board extends JFrame implements ActionListener
 	    height = x.height;
 	    
 	    //setting the application size on the users screen
-	    monopoly.setSize((width-60), (height-60));
+	    monopoly.setSize((width - 100), (height - 100));
 	    
 	    monopoly.setTitle("Panopoly");
 	    monopoly.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
