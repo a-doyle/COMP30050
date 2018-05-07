@@ -16,21 +16,21 @@ To run the game DOWNLOAD THE JAR FILE AND RUN IT FROM THERE / PULL THE CODE FROM
 # Codebase
 Each class submitted contains relevant logic for controlling the various functionality of the game, as follows;
 
-Board: Controls UI and core game logic (Run with this)
+..* Board: Controls UI and core game logic (Run with this)
 
 **The following Card classes are not integrated as we did not have enough time**
-Card: A simple Card object
-CardDeck: A LinkedList of multiple Card objects
-CardType: An enum containing a constant for each CardType, Chance and Community Chest
+..* Card: A simple Card object
+..* CardDeck: A LinkedList of multiple Card objects
+..* CardType: An enum containing a constant for each CardType, Chance and Community Chest
 
-Chance: Contains the various hard-coded Chance cards
-Command: Contains the various game commands a Player can enter
-Community Chest: Contains the various hard-coded Community Chest cards
-Dice: Contains the logic for the dice roll
+..* Chance: Contains the various hard-coded Chance cards
+..* Command: Contains the various game commands a Player can enter
+..* Community Chest: Contains the various hard-coded Community Chest cards
+..* Dice: Contains the logic for the dice roll
 
 **These classes was not integrated as we did not have enough time**
-NOCList: We attempted to integrate the NOCList into our project but didn't have enough time for it
-UI: We attempted to move the UI logic to a seperate class but were unable to complete given our shprt time frame
+..* NOCList: We attempted to integrate the NOCList into our project but didn't have enough time for it
+..* UI: We attempted to move the UI logic to a seperate class but were unable to complete given our shprt time frame
 
-Players: An ArrayList of Player objects, containing all the Player logic as well
-Properties: Contains the relevant logic for each individual property
+..* Players: An ArrayList of Player objects, containing all the Player logic as well
+..* Properties: Contains the relevant logic for each individual property
