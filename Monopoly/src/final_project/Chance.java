@@ -1,155 +1,185 @@
 package monopoly_take2;
 
-public class Chance {
-	
-	private static String cardDescription;
-	public static String cardType = "chance";
-	private static final CardType CARD_TYPE = CardType.CHANCE;
+import java.util.ArrayList;
 
-	public static void c1(){
-		int player = Board.currPlayer;
-		cardDescription = "You've been offered a sponsorship, collect your first pay package at Go!";
+public class Chance{
+	
+	public static int currPlayer;
+
+	public static void chance1(){
 		
-		UI.textArea.append(cardDescription);
-		Board.playerIcons[player].setLocation(Board.boardPos[0][0]+((player % 3) * UI.uqLoc),Board.boardPos[0][1]+((player / 3) * UI.uqLoc));
+		currPlayer = Board.currentPlayer;
+		int position = Board.PlayerArray[currPlayer].position;
+
+		
+		Board.textArea.append("Advance to Go and recieve 200 dollas !");
+		Board.Dots[currPlayer].setLocation(Board.BoardCoord[0][0]+((currPlayer % 3) * Board.offset),Board.BoardCoord[0][1]+((currPlayer / 3) * Board.offset));
+		
 	}
 	
-	public static void c2(){
-		int player = Board.currPlayer;
-		int position = Board.playerList[player].position;
-		cardDescription = "You've been caught in the gym selling steroids, that's a jailable offence!";
+	public static void chance2(){
+		currPlayer = Board.currentPlayer;
 
-		UI.textArea.append(cardDescription);
+		int position = Board.PlayerArray[currPlayer].position;
+		
+		Board.textArea.append("Go to the Library immediately. Do not pass Go. Do not collect €200.");
 		position = 10;
-		Board.playerIcons[player].setLocation(Board.boardPos[position][0] + ((player % 3) * UI.uqLoc), Board.boardPos[position][1] + ((player / 3) * UI.uqLoc));
-		Board.playerList[player].inJail = true;
+		Board.Dots[currPlayer].setLocation(Board.BoardCoord[position][0] + ((currPlayer % 3) * Board.offset), Board.BoardCoord[position][1] + ((currPlayer / 3) * Board.offset));
+		Board.PlayerArray[currPlayer].inJail = true;
 	}
 	
-	public static void c3(){
-		int player = Board.currPlayer;
-		int position = Board.playerList[player].position;
+	public static void chance3(){
+		currPlayer = Board.currentPlayer;
+
+		int position = Board.PlayerArray[currPlayer].position;
 		int temp = position;
-		cardDescription = "Advance to BodyPower (who knows where it is?), and enjoy a free goodie bag if you pass Go!";
-		
-		UI.textArea.append(cardDescription);
+		Board.textArea.append("Advance to Pall Mall. (arent they a box of fags ?) If you pass Go collect �200.");
+
 		position = 13;
+
 		if(temp > position){
-			Board.playerList[player].balance = Board.playerList[player].balance + 200;
+			Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance + 200;
 		}
-		Board.playerIcons[player].setLocation(Board.boardPos[position][0] + ((player % 3) * UI.uqLoc), Board.boardPos[position][1] + ((player / 3) * UI.uqLoc));
+		
+		Board.Dots[currPlayer].setLocation(Board.BoardCoord[position][0] + ((currPlayer % 3) * Board.offset), Board.BoardCoord[position][1] + ((currPlayer / 3) * Board.offset));
 
 	}
 	
-	public static void c4(){
-		int player = Board.currPlayer;
-		int position = Board.playerList[player].position;
-		cardDescription = "Take a trip to your local supplement store, collecting a goodie bag at the door if you pass Go!";
+	public static void chance4(){
 		
-		UI.textArea.append(cardDescription);
-		Board.playerIcons[player].setLocation(Board.boardPos[position][0] + ((player % 3) * UI.uqLoc), Board.boardPos[position][1] + ((player / 3) * UI.uqLoc));
-	}
-	
-	public static void c5(){	
-		UI.textArea.append("You've been offered pure creatine, undetectable by the law. Use it if you're caught to escape!");
-	}
-	
-	public static void c6(){
-		int player = Board.currPlayer;
-		int position = Board.playerList[player].position;
-		cardDescription = "Advance to WellFest to maintain a healthy body, free goodies for passing Go!";
+		currPlayer = Board.currentPlayer;
+
+		int position = Board.PlayerArray[currPlayer].position;
 		
-		UI.textArea.append(cardDescription);
-		Board.playerIcons[player].setLocation(Board.boardPos[position][0] + ((player % 3) * UI.uqLoc),
-		Board.boardPos[position][1] + ((player / 3) * UI.uqLoc));
+		Board.textArea.append("Take a trip to Marylebone Station and if you pass Go collect �200.");
+		
+		//Same again
+		Board.Dots[currPlayer].setLocation(Board.BoardCoord[position][0] + ((currPlayer % 3) * Board.offset), Board.BoardCoord[position][1] + ((currPlayer / 3) * Board.offset));
 	}
 	
-	public static void c7(){
-		int player = Board.currPlayer;
-		int position = Board.playerList[player].position;
+	public static void chance5(){
+		
+		currPlayer = Board.currentPlayer;
+
+		int position = Board.PlayerArray[currPlayer].position;
+		
+		Board.textArea.append("Get out of jail free (ya lucky bollox). This card may be kept until needed or sold.");
+	}
+	
+	public static void chance6(){
+		
+		currPlayer = Board.currentPlayer;
+
+		int position = Board.PlayerArray[currPlayer].position;
+		
+		Board.textArea.append("Advance to Trafalgar Square. If you pass Go collect �200.");
+		
+		Board.Dots[currPlayer].setLocation(Board.BoardCoord[position][0] + ((currPlayer % 3) * Board.offset),
+				Board.BoardCoord[position][1] + ((currPlayer / 3) * Board.offset));
+	}
+	
+	public static void chance7(){
+		
+		currPlayer = Board.currentPlayer;
+
+		int position = Board.PlayerArray[currPlayer].position;
 		int tempPosition = position;
-		cardDescription = "You've been asked to leave this spot for being too large; a compliment I guess?";
 		
-		UI.textArea.append(cardDescription);
+		Board.textArea.append("Advance to Gr1 \n");
+		
 		if(tempPosition > position){
-			Board.playerList[player].balance = Board.playerList[player].balance + 200;
+			Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance + 200;
+
 		}
+		
 		position = 31;
-		Board.playerIcons[player].setLocation(Board.boardPos[position][0] + ((player % 3) * UI.uqLoc), Board.boardPos[position][1] + ((player / 3) * UI.uqLoc));
+		Board.Dots[currPlayer].setLocation(Board.BoardCoord[position][0] + ((currPlayer % 3) * Board.offset), Board.BoardCoord[position][1] + ((currPlayer / 3) * Board.offset));
 	}
 	
-	public static void c8(){
-		int player = Board.currPlayer;
-		int position = Board.playerList[player].position;
-		cardDescription = "Oh no, you left your protein at home, go back three spaces and get it!";
+	public static void chance8(){
 		
-		UI.textArea.append(cardDescription);
+		currPlayer = Board.currentPlayer;
+
+		int position = Board.PlayerArray[currPlayer].position;
+		
+		Board.textArea.append("OOPS. Go back 3 spaces !");
+		
 		position -= 3;
-		Board.playerIcons[player].setLocation(Board.boardPos[position][0] + ((player % 3) * UI.uqLoc), Board.boardPos[position][1] + ((player / 3) * UI.uqLoc));
-	}
-	
-	public static void c9(){
-		cardDescription = "Time to stock up on supps; pay 25 for tablets (houses) and 100 for powders (hotels)!";
-		UI.textArea.append(cardDescription);
-	}
-	
-	public static void c10(){
-		cardDescription = "You are assessed for street repairs: $40 per house. $115 per hotel!";
-		UI.textArea.append(cardDescription);
-	}
-	
-	public static void c11(){
-		cardDescription = "Pay your anabolic dealer what you owe, a nice 100!";
-		int player = Board.currPlayer;
 		
-		UI.textArea.append(cardDescription);
-		Board.playerList[player].balance = Board.playerList[player].balance - 100;
+		Board.Dots[currPlayer].setLocation(Board.BoardCoord[position][0] + ((currPlayer % 3) * Board.offset), Board.BoardCoord[position][1] + ((currPlayer / 3) * Board.offset));
 	}
 	
-	public static void c12(){
-		cardDescription = "Kicked out of coppers for some roid rage and attacking some poor soul, lose 20!";
-		int player = Board.currPlayer;
+	
+	public static void chance9(){
 		
-		UI.textArea.append(cardDescription);
-		Board.playerList[player].balance = Board.playerList[player].balance - 20;
+		currPlayer = Board.currentPlayer;
+
+		Board.textArea.append("Make general repairs to your houses. For each house $25 or $100 fo yo hotelz");
+	}
+	
+	public static void chance10(){
+		
+		currPlayer = Board.currentPlayer;
+
+		Board.textArea.append("You are assessed for street repairs: $40 per house. $115 per hotel");
 
 	}
 	
-	public static void c13(){
-		int player = Board.currPlayer;
-		cardDescription = "Garda have caught you racing your car, pay them 15 and they'll pretend they never saw you!";
+	
+	//Deducts 150 from the users balance
+	public static void chance11(){
 		
-		UI.textArea.append(cardDescription);
-		Board.playerList[player].balance = Board.playerList[player].balance - 10;
+		currPlayer = Board.currentPlayer;
+				
+		Board.textArea.append("Pay your college levy of $150");
+		Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance - 150;
+	}
+	
+	public static void chance12(){
+		
+		currPlayer = Board.currentPlayer;
+		
+		Board.textArea.append("Kicked out of coppers and arrested for drunken disorder. Fined $20. \n Stay off that vodka hey !");
+		Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance - 20;
 
 	}
 	
-	public static void c14(){		
-		int player = Board.currPlayer;
-		cardDescription = "You have been granted a pay package from your sponsorship, here's 200!";
+	public static void chance13(){
+	
+		currPlayer = Board.currentPlayer;
+
 		
-		UI.textArea.append(cardDescription);
-		Board.playerList[player].balance = Board.playerList[player].balance + 200;
+		Board.textArea.append("Boy racer ya caught by the Gardai. Fined $50");
+		Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance - 50;
 
 	}
 	
-	public static void c15(){	
-		int player = Board.currPlayer;
-		cardDescription = "You've been granted a referral reward from your gym by getting your family involved, here's 100!";
+	public static void chance14(){
 		
-		UI.textArea.append(cardDescription);
-		Board.playerList[player].balance = Board.playerList[player].balance + 100;
+		currPlayer = Board.currentPlayer;
+
+		
+		Board.textArea.append("You've somehow got a 4.1 GPA. Heres a cheeky $150 ya rooster.");
+		Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance + 150;
 
 	}
 	
-	public static void c16(){
-		int player = Board.currPlayer;
-		cardDescription = "You win a competition in the supp store and the prize is 50!";
+	public static void chance15(){
 		
-		UI.textArea.append(cardDescription);
-		Board.playerList[player].balance = Board.playerList[player].balance + 50;
+		currPlayer = Board.currentPlayer;
+
+		
+		Board.textArea.append("Yourself and your granny have won a crossword competition ? (yikes). Heres $100");
+		Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance + 100;
+
 	}
 	
-	public CardType getCardType() {
-		return CARD_TYPE;
-	}
+	public static void chance16(){
+		
+		currPlayer = Board.currentPlayer;
+	
+		
+		Board.textArea.append("Bank pays you (unlikely nowadays) heres $50");
+		Board.PlayerArray[currPlayer].balance = Board.PlayerArray[currPlayer].balance + 50;
+	}	
 }
