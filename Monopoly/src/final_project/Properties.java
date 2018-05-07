@@ -43,7 +43,7 @@ public class Properties
 			220,220,240,200,260,260,150,280,
 			300,300,320,200,350,400};
 	
-	private static String[] placeNames = {"Go","Woodbine Avenue","Community Chest","Woodbine Road","Income taxes","Heuston Station","O Willy Hall",
+	static String[] placeNames = {"Go","Woodbine Avenue","Community Chest","Woodbine Road","Income taxes","Heuston Station","O Willy Hall",
 			"Chance your arm!","Science East","Science West","Library(Jail)",
 			"Pi Cafe","Poolbeg","Pulse Cafe","Donald Trumps Armpit","Connolly Station","Gangsters Paradise","Community chest","Newman","Merville","Free Parking?",
 			"Computer Science","Chance your leg?","RTE Radio Mast","Obamas Secret Hash Garden","Dundalk Station","Trump Tower",
@@ -57,12 +57,11 @@ public class Properties
 			{26,130,390,900,1100,1275},{26,130,390,900,1100,1275},{28,150,450,1000,1200,1400},{25,50,100,200,200,200},{35,175,500,1100,1300,1500},{50,200,600,1400,1700,2000}};
 	
 	
-	public Properties(int BoardPos, String name,int Cost,int[] RentList,int housePrice,boolean buyable)
-	{
+	public Properties(int BoardPos, String name, int Cost, int[] RentList,int housePrice,boolean buyable){
 		propertyName=name;
 		value=Cost;
 		rents = RentList;
-		houseCost=housePrice;
+		houseCost = housePrice;
 		this.buyable=buyable;
 	}
 	public String WhoOwns()
@@ -79,12 +78,12 @@ public class Properties
 		int temppos;
 		boolean monopolystate = true;
 		
-		if(propList[position].owned==true|| Board.PlayerArray[currPlayer].balance < propList[position].value || propList[position].buyable==false) {
+		if(propList[position].owned == true|| Board.PlayerArray[currPlayer].balance < propList[position].value || propList[position].buyable == false) {
 			return "This property is not taking any offers\n";
 		}
 		else {
 			propList[position].owned = true;
-			propList[position].ownedByPlayer=Board.PlayerArray[currPlayer].name;
+			propList[position].ownedByPlayer = Board.PlayerArray[currPlayer].name;
 			Board.PlayerArray[currPlayer].buyProperty(propList[position]);
 			propList[position].Owner = Board.PlayerArray[currPlayer];
 		}
@@ -146,7 +145,7 @@ public class Properties
 		}
 		
 		else if(position == 12 || position == 28){
-			if((propList[336/position].Owner==propList[position].Owner)) {
+			if((propList[336/position].Owner == propList[position].Owner)) {
 				rent = 10 * Command.roll;
 			}
 			else {
@@ -175,11 +174,10 @@ public class Properties
 	}
 	
 	//Function creates all the properties and puts into array
-	public static void createProperties()
-	{
+	public static void createProperties(){
 		for(int i = 0; i < 40; i++){
-			if(functions[i] < 1) {
-				propList[i]= new Properties(i, placeNames[i], 0, null, 0, false);
+			if(functions[i] <  1) {
+				propList[i] = new Properties(i, placeNames[i], 0, null, 0, false);
 			}
 			else{
 				propList[i]= new Properties(i,placeNames[i], SITE_PRICES[functions[i]-1],SITE_RENTS[functions[i]-1], HOUSE_PRICE[functions[i]-1],true);
@@ -187,12 +185,4 @@ public class Properties
 		}
 	}
 					
-			
-	public void setMortgage(boolean mort){
-		this.mortgaged = mort;
-	}
-	
-	public boolean isMortgaged(){
-		return this.mortgaged;
-	}
 }
