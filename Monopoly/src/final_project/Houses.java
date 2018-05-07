@@ -392,24 +392,20 @@ public class Houses {
 			return;
 		}
 		
-		else if(Properties.propList[placePosition].houseCount == 0)
-		{
+		else if(Properties.propList[placePosition].houseCount == 0){
 			Board.textArea.append("You have no propety to demolish");
 			Board.CanEnd=true;
 			return;
 		}
 		
-		else if(Properties.propList[placePosition].houseCount == 1)
-		{
-			if(numHouses>1)
-			{
+		else if(Properties.propList[placePosition].houseCount == 1){
+			if(numHouses>1){
 				Board.textArea.append("You do not have " + numHouses + " houses on this property to demolish.");
 				
 				Board.CanEnd=true;
 				return;
 			}
-			else
-			{
+			else{
 				Properties.propList[placePosition].houseCount -= numHouses;
 				
 				int costOfDemolish = ((numHouses * Properties.propList[placePosition].houseCost)/2);
@@ -424,17 +420,14 @@ public class Houses {
 				return;
 			}
 		}
-		else if(Properties.propList[placePosition].houseCount == 2)
-		{
-			if(numHouses>2)
-			{
+		else if(Properties.propList[placePosition].houseCount == 2){
+			if(numHouses>2){
 				Board.textArea.append("You do not have " + numHouses + " houses on this property to demolish.");
 				
 				Board.CanEnd=true;
 				return;
 			}
-			else
-			{
+			else{
 				Properties.propList[placePosition].houseCount -= numHouses;
 				
 				int costOfDemolish = ((numHouses * Properties.propList[placePosition].houseCost)/2);
@@ -449,43 +442,14 @@ public class Houses {
 				return;
 			}
 		}
-		else if(Properties.propList[placePosition].houseCount == 3)
-		{
-			if(numHouses>3)
-			{
+		else if(Properties.propList[placePosition].houseCount == 3){
+			if(numHouses>3){
 				Board.textArea.append("You do not have " + numHouses + " houses on this property to demolish.");
 				
 				Board.CanEnd=true;
 				return;
 			}
-			else
-			{
-				Properties.propList[placePosition].houseCount -= numHouses;
-				
-				int costOfDemolish = ((numHouses * Properties.propList[placePosition].houseCost)/2);
-				
-				Board.PlayerArray[player].balance = Board.PlayerArray[player].balance  + costOfDemolish;
-				
-				Properties.propList[position].Owner.balance += costOfDemolish;
-				
-				Board.textArea.append(numHouses+" bought at "+costOfDemolish*2+". sold at " + costOfDemolish+"."
-											+ "You have " + Properties.propList[placePosition].houseCount + " houses on this property");
-				Board.CanEnd=true;					
-				return;
-			}
-		}
-		
-		else if(Properties.propList[placePosition].houseCount == 4)
-		{
-			if(numHouses>4)
-			{
-				Board.textArea.append("You do not have " + numHouses + " houses on this property to demolish.");
-				
-				Board.CanEnd=true;
-				return;
-			}
-			else
-			{
+			else{
 				Properties.propList[placePosition].houseCount -= numHouses;
 				
 				int costOfDemolish = ((numHouses * Properties.propList[placePosition].houseCost)/2);
@@ -501,17 +465,37 @@ public class Houses {
 			}
 		}
 		
-		else if(Properties.propList[placePosition].houseCount == 5)
-		{
-			if(numHouses>5)
-			{
+		else if(Properties.propList[placePosition].houseCount == 4){
+			if(numHouses>4){
 				Board.textArea.append("You do not have " + numHouses + " houses on this property to demolish.");
 				
 				Board.CanEnd=true;
 				return;
 			}
-			else
-			{
+			else{
+				Properties.propList[placePosition].houseCount -= numHouses;
+				
+				int costOfDemolish = ((numHouses * Properties.propList[placePosition].houseCost)/2);
+				
+				Board.PlayerArray[player].balance = Board.PlayerArray[player].balance  + costOfDemolish;
+				
+				Properties.propList[position].Owner.balance += costOfDemolish;
+				
+				Board.textArea.append(numHouses+" bought at "+costOfDemolish*2+". sold at " + costOfDemolish+"."
+											+ "You have " + Properties.propList[placePosition].houseCount + " houses on this property");
+				Board.CanEnd=true;					
+				return;
+			}
+		}
+		
+		else if(Properties.propList[placePosition].houseCount == 5){
+			if(numHouses>5){
+				Board.textArea.append("You do not have " + numHouses + " houses on this property to demolish.");
+				
+				Board.CanEnd=true;
+				return;
+			}
+			else{
 				Properties.propList[placePosition].houseCount -= numHouses;
 				
 				int costOfDemolish = ((numHouses * Properties.propList[placePosition].houseCost)/2);
