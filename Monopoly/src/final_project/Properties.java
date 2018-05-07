@@ -178,8 +178,8 @@ public class Properties
 	public static void createProperties()
 	{
 		for(int i = 0; i < 40; i++){
-			if(functions[i]<1) {
-				propList[i]= new Properties(i,placeNames[i], 0, null, 0, false);
+			if(functions[i] < 1) {
+				propList[i]= new Properties(i, placeNames[i], 0, null, 0, false);
 			}
 			else{
 				propList[i]= new Properties(i,placeNames[i], SITE_PRICES[functions[i]-1],SITE_RENTS[functions[i]-1], HOUSE_PRICE[functions[i]-1],true);
