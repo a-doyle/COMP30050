@@ -25,10 +25,12 @@ Each class submitted contains relevant logic for controlling the various functio
 12. Properties: Contains the relevant logic for each individual property
 
 **The following Card classes are not integrated as we did not have enough time**
+
 2. Card: A simple Card object
 3. CardDeck: A LinkedList of multiple Card objects
 4. CardType: An enum containing a constant for each CardType, Chance and Community Chest
 
 **These classes was not integrated as well as we did not have enough time**
+
 9. NOCList: We attempted to integrate the NOCList into our project
 10. UI: We attempted to move the UI logic to a seperate class
