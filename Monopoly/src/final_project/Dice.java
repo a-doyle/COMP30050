@@ -26,7 +26,6 @@ public class Dice {
 	}
 
 	public int getDice2Value() {
-		// TODO Auto-generated method stub
 		return dice2;
 	}
 	
