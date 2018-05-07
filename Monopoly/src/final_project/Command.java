@@ -28,15 +28,7 @@ public class Command
 		boolean threeDoubles = false;
 		int diceValue1 = di.getDice1Value();
 		int diceValue2 = di.getDice2Value();
-		
-		/*Only starting must think of more logical way of determining if the user has 
-		rolled more then 2 doubles during his turn*/
-		
-//		if(Board.PlayerArray[player].rollCount > 3){
-//			Board.textArea.append("You rolled three Doubles ! \n Sadly thats not good and you must go to jail.");
-//			//Send user to jail
-//		}
-		
+
 		if(Board.canRoll != true){
 			Board.textArea.append("Cannot roll again!\n");
 			Scroll();
@@ -94,10 +86,6 @@ public class Command
 					Board.BoardCoord[position][1] + ((currPlayer / 3) * Board.offset));
 		}
 		
-//		if(Board.PlayerArray[player].threeDouble == true){
-//			//Sends the user straight to jail
-//			Board.CanEnd = true;
-//		}
 		
 		//The negative balance statement
 		if(Board.PlayerArray[currPlayer].balance < 0){
