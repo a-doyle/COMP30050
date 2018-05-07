@@ -33,4 +33,3 @@ Each class submitted contains relevant logic for controlling the various functio
 **These classes was not integrated as well as we did not have enough time**
 
 9. NOCList: Simple NOCList reader done but is not integrated into our project
-10. UI: We attempted to move the UI logic to a seperate class
