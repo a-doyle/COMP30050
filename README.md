@@ -17,20 +17,16 @@ To run the game DOWNLOAD THE JAR FILE AND RUN IT FROM THERE / PULL THE CODE FROM
 Each class submitted contains relevant logic for controlling the various functionality of the game, as follows;
 
 1. Board: Controls UI and core game logic (Run with this)
-
-**The following Card classes are not integrated as we did not have enough time**
-2. Card: A simple Card object
-3. CardDeck: A LinkedList of multiple Card objects
-4. CardType: An enum containing a constant for each CardType, Chance and Community Chest
-
 5. Chance: Contains the various hard-coded Chance cards
 6. Command: Contains the various game commands a Player can enter
 7. Community Chest: Contains the various hard-coded Community Chest cards
 8. Dice: Contains the logic for the dice roll
-
-**These classes was not integrated as we did not have enough time**
-9. NOCList: We attempted to integrate the NOCList into our project but didn't have enough time for it
-10. UI: We attempted to move the UI logic to a seperate class but were unable to complete given our shprt time frame
-
 11. Players: An ArrayList of Player objects, containing all the Player logic as well
 12. Properties: Contains the relevant logic for each individual property
+**The following Card classes are not integrated as we did not have enough time**
+2. Card: A simple Card object
+3. CardDeck: A LinkedList of multiple Card objects
+4. CardType: An enum containing a constant for each CardType, Chance and Community Chest
+**These classes was not integrated as well as we did not have enough time**
+9. NOCList: We attempted to integrate the NOCList into our project
+10. UI: We attempted to move the UI logic to a seperate class
